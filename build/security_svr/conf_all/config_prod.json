@@ -1,0 +1,28 @@
+{
+	"env": "prod",
+	"port": 19998,
+	"inner_host": "xxx",
+	"image_host": "xxx",
+	"check_svr_host": "xxx",
+	"check_svr_ip": "xxx",
+	"kafka_config": {
+		"addr": ["xx:9091", "xxx:9092", "xxx:9093"]
+	},
+	"mysql_config": {
+		"host": "xxx",
+		"port": 3306,
+		"user": "xxx",
+		"pwd" :"xxx",
+		"db_name": "xxx"
+	},
+	"redis_config": {
+		"addr": "xxx:6379",
+		"pwd" :"xxx"
+	},
+	"mongodb_config": {
+		"addr": "xxx:27017",
+		"user": "xxx",
+		"pwd" :"xxx",
+		"db_name": "xxx"
+	}
+}

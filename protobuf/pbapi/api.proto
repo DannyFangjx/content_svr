@@ -1,0 +1,131 @@
+syntax="proto3";
+option go_package = "content_svr/protobuf/pbapi;pbapi";  //前边部分表示生成pb文件的路径，后边部分表示pb文件的包名。
+
+/**
+ * @Description :   http req and resp
+ **/
+message BaseResp{
+}
+
+// debug api
+message DebugUserInfoReq{
+  // @inject_tag: json:"user_id" form:"user_id"
+  int32 userId = 1;
+}
+
+
+
+message HttpHeaderInfo {
+  string apptype = 1;
+  string appname = 2;
+  string token = 3;
+  string versioncode = 4;
+  int64  debuguserid = 5;
+  string uk = 6;
+  string platform = 7;
+  string ip = 8;
+}
+
+
+
+/**
+ * @Description :   DbModel
+ **/
+// DB   public class UserInfo {
+message UserinfoDbModel {
+  // @inject_tag: gorm:"id"
+  optional int64 id = 1; // 主键
+
+  // @inject_tag: gorm:"user_id"
+  optional int64 user_id = 2; // 用户id，全局唯一标识
+
+  // @inject_tag: gorm:"app_flag"
+  optional int32 app_flag = 3; // 应用标识，1:笑话；2:趣图；3:壁纸；4:星座，5:正能量，6:求赞，7；速配，14:猫爪运动
+
+  // @inject_tag: gorm:"phone"
+  optional string phone = 4; // 手机号码
+
+  // @inject_tag: gorm:"password"
+  optional string password = 5; // 登陆密码，加盐后使用md5存储
+
+  // @inject_tag: gorm:"nick_name"
+  optional string nick_name = 6; // 昵称
+
+  // @inject_tag: gorm:"open_nick_name"
+  optional string open_nick_name = 7; // 第三方昵称
+
+  // @inject_tag: gorm:"contact"
+  optional string contact = 8; // 联系方式
+
+  // @inject_tag: gorm:"photo"
+  optional string photo = 9; // 头像
+
+  // @inject_tag: gorm:"open_photo"
+  optional string open_photo = 10; // 第三方头像
+
+  // @inject_tag: gorm:"source"
+  optional int32 source = 11; // 用户来源 1:微信；2:qq；3:新浪微博；0:系统注册
+
+  // @inject_tag: gorm:"birth"
+  optional string birth = 12; // 生日
+
+  // @inject_tag: gorm:"gender"
+  optional int32 gender = 13; // 性别 2女 1男
+
+  // @inject_tag: gorm:"type
+  optional int32 type = 14; // 用户类型 1:普通用户；2:大神陪玩
+
+  // @inject_tag: gorm:"level"
+  optional string level = 15; // 普通用户等级
+
+  // @inject_tag: gorm:"focus"
+  optional int32 focus = 16; // 关注用户数量
+
+  // @inject_tag: gorm:"fans"
+  optional int32 fans = 17; // 被关注次数
+
+  // @inject_tag: gorm:"province"
+  optional string province = 18; // 所在省份
+
+  // @inject_tag: gorm:"city"
+  optional string city = 19; // 所在城市
+
+  // @inject_tag: gorm:"constellation"
+  optional string constellation = 20; // 星座
+
+  // @inject_tag: gorm:"description"
+  optional string description = 21; // 签名
+
+  // @inject_tag: gorm:"score"
+  optional int32 score = 22; // 评价总分
+
+  // @inject_tag: gorm:"order_quantity"
+  optional int32 order_quantity = 23; // 完成总单数
+
+  // @inject_tag: gorm:"enabled"
+  optional int32 enabled = 24; // 启用状态,1:启用，2:限时封禁，3:永久封禁
+
+  // @inject_tag: gorm:"works_lock"
+  optional int32 works_lock = 25; // 作品发布锁定，1:启用，2:限时封禁，3:永久封禁
+
+  // @inject_tag: gorm:"comment_lock"
+  optional int32 comment_lock = 26; // 作品发布锁定，1:启用，2:限时封禁，3:永久封禁
+
+  // @inject_tag: gorm:"status"
+  optional int32 status = 27; // 用户状态,0:无效；1:有效
+
+  // @inject_tag: gorm:"create_time"
+  optional string create_time = 28; // 创建时间
+
+  // @inject_tag: gorm:"update_time"
+  optional string update_time = 29; // 最后修改时间
+
+  // @inject_tag: gorm:"update_gender_count"
+  optional int32 update_gender_count = 30; // 性别修改次数
+
+  // @inject_tag: gorm:"friend_lock"
+  optional int32 friend_lock = 31; // 好友开关 1：开，0：关
+
+  // @inject_tag: gorm:"-" json:"-"
+  optional int32 embeddedNamer = 1000; // 系统字段，配置tablename
+}

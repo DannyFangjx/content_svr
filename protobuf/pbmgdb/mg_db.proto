@@ -1,0 +1,20 @@
+syntax="proto3";
+option go_package = "content_svr/protobuf/pbmgdb;pbmgdb";  //前边部分表示生成pb文件的路径，后边部分表示pb文件的包名。
+
+
+
+//SecretWorksLikeRecordMgDbModel
+message ipAddressMgDbModel{
+  // @inject_tag: bson:"_id"
+  string id =1;
+  // @inject_tag: bson:"province"
+  optional string province = 2;
+  // @inject_tag: bson:"city"
+  optional string city = 3;
+  // @inject_tag: bson:"longitude"
+  optional double longitude = 4;
+  // @inject_tag: bson:"latitude"
+  optional double latitude = 5;
+  // @inject_tag: bson:"cityCode"
+  optional int32 cityCode = 6;
+}

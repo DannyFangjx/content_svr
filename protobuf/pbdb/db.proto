@@ -1,0 +1,2 @@
+syntax="proto3";
+option go_package = "content_svr/protobuf/pbdb;pbdb";  //前边部分表示生成pb文件的路径，后边部分表示pb文件的包名。

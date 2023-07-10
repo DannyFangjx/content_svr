@@ -1,0 +1,157 @@
+syntax="proto3";
+option go_package = "content_svr/protobuf/pbkfk;pbkfk";  //前边部分表示生成pb文件的路径，后边部分表示pb文件的包名。
+
+
+message SimpleUserWsInfoResponse {
+    // @inject_tag: json:"userId" structs:"userId"
+    int64 userId = 1;     //用户ID
+    // @inject_tag: json:"nickName" structs:"nickName"
+    string nickName= 2;  //用户昵称
+    // @inject_tag: json:"photo"  structs:"photo"
+    string photo= 3;   //用户头像
+    // @inject_tag: json:"gender" structs:"gender"
+    int32 gender= 4;   //性别 2女 1男
+  // @inject_tag: json:"isConvoy" structs:"isConvoy"
+    bool isConvoy = 10;    //是否是护卫队 true是 false否
+    // @inject_tag: json:"showConvoy" structs:"showConvoy"
+    bool showConvoy = 11;    //是否展示护卫队标识 true是 false否
+    // @inject_tag: json:"memberType" structs:"memberType"
+    int32 memberType = 12;   //会员类型 0非会员 1-svip 2赠送会员 3-普通会员
+}
+
+
+message PersonalSignTalkWsDto {
+  // @inject_tag: json:"id" structs:"id"
+  int64 id = 1;        //消息id
+  // @inject_tag: json:"workId" structs:"workId"
+  optional int64 workId =2;
+  // @inject_tag: json:"fromUserId" structs:"fromUserId"
+  optional int64 fromUserId =3;
+  // @inject_tag: json:"province" structs:"province"
+  optional string province=4;
+  // @inject_tag: json:"city" structs:"city"
+  optional string city=5;
+  // @inject_tag: json:"fromUser" structs:"fromUser"
+  optional SimpleUserWsInfoResponse fromUser = 6;      //消息发布人简略信息
+  // @inject_tag: json:"toUserId" structs:"toUserId"
+  optional int64 toUserId = 7;
+  // @inject_tag: json:"content" structs:"content"
+  optional string content= 8;     //消息内容
+  // @inject_tag: json:"createTime" structs:"createTime"
+  optional int64 createTime= 9;        // 消息发布时间
+  // @inject_tag: json:"width" structs:"width"
+  optional int32 width = 10;      // 图片消息时候图片的宽度
+  // @inject_tag: json:"high" structs:"high"
+  optional int32 high =11;       // 图片消息时图片的高度
+  // @inject_tag: json:"objectId" structs:"objectId"
+  optional string objectId=12;        // 图片或语音消息时存储在OSS的标识
+  // @inject_tag: json:"messageType" structs:"messageType"
+  optional int32 messageType=13;        //，1:文字;2:图片;3:语音;99:自定义表情
+  // @inject_tag: json:"memeId" structs:"memeId"
+  optional int64 memeId=14;        //自定义表情的id
+  // @inject_tag: json:"longitude" structs:"longitude"
+  optional double longitude=15;       // 经度
+  // @inject_tag: json:"latitude" structs:"latitude"
+  optional double latitude=16;        // 纬度
+  // @inject_tag: json:"openId" structs:"openId"
+  optional string openId=17;      // 消息发布人的openId，仅对方是QQ端有值
+}
+
+message TsnPushSingleMessageDto {
+  // @inject_tag: json:"type" structs:"type"
+  string type = 1;        //required 消息类型  系统通知 system_notification 单聊消息 single_message
+  // @inject_tag: json:"title" structs:"title"
+  optional string title =2;   // 标题
+  // @inject_tag: json:"subtitle" structs:"subtitle"
+  optional string subtitle = 3;        //副标题
+  // @inject_tag: json:"planId" structs:"planId"
+  optional int64 planId = 4;        //推送计划的id
+  // @inject_tag: json:"content" structs:"content"
+  optional string content = 5;     //required 内容
+  // @inject_tag: json:"icon" structs:"icon"
+  optional string icon = 6;          //图片
+  // @inject_tag: json:"customContent" structs:"customContent"
+  optional string customContent = 7;       //附加参数对象 转为json字符串
+  // @inject_tag: json:"userIds" structs:"userIds"
+  repeated int64 userIds = 8;         //消息接收人，不传则为全量推送
+  // @inject_tag: json:"messageType" structs:"messageType"
+  optional string messageType = 9;    //required 消息类型：通知栏消息notify 静默消息message
+  // @inject_tag: json:"intent" structs:"intent"
+  optional string intent = 10;      // 安卓唤起路径
+  // @inject_tag: json:"environment" structs:"environment"
+  optional string environment = 11;        //ios环境 product dev
+  // @inject_tag: json:"platforms" structs:"platforms"
+  repeated string platforms = 12;   //推送平台ios android，不传为全平台推送
+}
+
+
+message PersonalBottleWorksDto {
+  // @inject_tag: json:"id"
+  optional int64 id =1;
+  // @inject_tag: json:"userId"
+  optional int64 userId=2;
+  // @inject_tag: json:"title"
+  optional string title=3;
+  // @inject_tag: json:"createTime"
+  optional int64 createTime=4;
+  // @inject_tag: json:"systemTime"
+  optional int64 systemTime=5;
+  // @inject_tag: json:"type"
+  optional int32 type=6;   //      1- 新增或更新   2- 删除
+  // @inject_tag: json:"startTime"
+  optional int64 startTime=7;
+  // @inject_tag: json:"endTime"
+  optional int64 endTime=8;
+  // @inject_tag: json:"appType"
+  optional int32 appType=9;
+  // @inject_tag: json:"verifyStatus"
+  optional int32 verifyStatus=10;        // 0待审核 1审核通过 2审核拒绝 5隐藏
+  // @inject_tag: json:"worksType"
+  optional int32 worksType=11;
+}
+
+
+message CtxHeader {
+  // @inject_tag: json:"userAgent"
+  string userAgent = 1;   //客户端的系统版本
+  // @inject_tag: json:"remoteAddr"
+  string remoteAddr=2;    //客户端的IP
+  // @inject_tag: json:"remoteHost"
+  string remoteHost=3;    //客户端的主机名
+  // @inject_tag: json:"remotePort"
+  int32 remotePort=4;   //客户端的端口
+  // @inject_tag: json:"remoteUser"
+  string remoteUser=5;    //客户端的用户
+  // @inject_tag: json:"localAddr"
+  string localAddr=6;   //服务器IP
+  // @inject_tag: json:"localPort"
+  int32 localPort=7;    //服务器端口Integer
+  // @inject_tag: json:"phoneId"
+  string phoneId=8;   //手机的id
+  // @inject_tag: json:"phoneBrand"
+  string phoneBrand=9;    //手机厂商
+  // @inject_tag: json:"phoneModel"
+  string phoneModel=10;    //手机型号
+  // @inject_tag: json:"phoneOS"
+  string phoneOS=11;   //手机系统
+  // @inject_tag: json:"phoneOSVersion"
+  string phoneOSVersion=12;    //手机系统版本
+  // @inject_tag: json:"token"
+  string token=13;    //header中的token
+  // @inject_tag: json:"uk"
+  string uk=14;    //header中的uk
+  // @inject_tag: json:"versioncode"
+  string versioncode=15;   //header中的versioncode
+  // @inject_tag: json:"channel"
+  string channel=16;   //header中的channel
+  // @inject_tag: json:"entrance"
+  string entrance=17;    //header中的entrance
+  // @inject_tag: json:"timestamp"
+  string timestamp=18;   //header中的timestamp
+  // @inject_tag: json:"appname"
+  string appname=19;   //header中的appname
+  // @inject_tag: json:"sign"
+  string sign=20;      //header中的sign
+  // @inject_tag: json:"apptype"
+  string apptype=21;     //header中的apptype
+}
